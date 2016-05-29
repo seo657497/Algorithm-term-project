@@ -1,20 +1,24 @@
 #include <stdio.h>
+#include <stdlib.h>
+#define RED 1
+#define BLACK 0
+#define MAXROW 100
 
-//rbtreeÀÇ ³ëµå
+//rbtreeì˜ ë…¸ë“œ
 typedef struct _node{
-	Node * parent; //ºÎ¸ğ ³ëµå
-	Node * left; //¿ŞÂÊ ÀÚ½Ä ³ëµå
-	Node * right; //¿À¸¥ÂÊ ÀÚ½Ä ³ëµå
-	char redFlag; //·¹µå¸é 1, ·¹µå°¡ ¾Æ´Ï¸é 0 
+	struct _node * parent; //ë¶€ëª¨ ë…¸ë“œ
+	struct _node * left; //ì™¼ìª½ ìì‹ ë…¸ë“œ
+	struct _node * right; //ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œ
+	char color; //ë ˆë“œë©´ 1, ë ˆë“œê°€ ì•„ë‹ˆë©´ 0 
 
-	//µ¥ÀÌÅÍ ÇÊµå
+	//ë°ì´í„° í•„ë“œ
 	int col;
 	int row;
 }Node;
 
 //rbtree
 typedef struct _rbtree{
-	int num; //³ëµåÀÇ °¹¼ö
+	int num; //ë…¸ë“œì˜ ê°¯ìˆ˜
 
 	Node * root;
 }RBtree;
@@ -22,15 +26,31 @@ typedef struct _rbtree{
 
 void RBinit(RBtree * rbtree);
 
-void Getkey(Node * node);
+int Getkey(Node * node);
+
+Node * GrandParent(Node * node);
+
+Node * Uncle(Node * node);
 
 Node * SetNode(int col, int right);
 
-void RBDelete(RBtree * rbtree, Node delNode);
+void LRotate(Node * node);
 
-void RBInsert(RBtree * rbtree, Node newNode);
+void RRotate(Node * node);
+
+void RBDelete(RBtree * rbtree, Node * delNode);
+
+int RBInsert(RBtree * rbtree, Node * newNode);
+void InsertCase1(RBtree * rbtree, Node * newNode);
+void InsertCase2(RBtree * rbtree, Node * newNode);
+void InsertCase3(RBtree * rbtree, Node * newNode);
+void InsertCase4(RBtree * rbtree, Node * newNode);
+void InsertCase5(RBtree * rbtree, Node * newNode);
 
 void RBPrint(RBtree * rbtree);
 
-void RBSearch(RBtree * rbtree, Node searchNode);
+Node * RBSearch(RBtree * rbtree, int key);
 
+
+//ì œì¶œì‹œì—” ì‚­ì œ
+void RBTest_Print(Node * node);
